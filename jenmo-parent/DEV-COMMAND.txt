@@ -1,0 +1,21 @@
+
+ -javaagent:/home/nicolas/.m2/repository/org/apache/openjpa/openjpa/2.0.0-SNAPSHOT/openjpa-2.0.0-SNAPSHOT.jar
+ -javaagent:/home/nicolas/.m2/repository/eclipselink/eclipselink/2.0.0.M2/eclipselink-2.0.0.M2.jar
+ 
+// ----
+
+mvn -X install:install-file -Dfile=path/to/mly/jar -DgroupId=j<groupname> -DartifactId=<artifactname> -Dversion=<version> -Dpackaging=jar -DpomFile=path/to/pom.xml
+mvn -X install:install-file -Dfile=path/to/mly/jar -DgroupId=j<groupname> -DartifactId=<artifactname> -Dversion=<version> -Dpackaging=jar -DgeneratePom=true 
+ 
+// -----
+
+Change for another JPA Provider:
+ * javaagent
+ * <user_home>/.m2/settings.xml
+ * src/test/resources/jenmo.properties
+ * my.properties
+
+// -----
+
+MySQL preallocation?!
+

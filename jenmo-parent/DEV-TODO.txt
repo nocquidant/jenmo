@@ -1,0 +1,7 @@
+** Forum : evict+managedobjects ? 
+** Temps aberrant?
+** query (getEmFromNode) NamedQuery ?
+** BugFix OpenJpa on remove??
+** test OJP+PGres avec identity?!
+** packager
+** site web

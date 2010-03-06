@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings
+	xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.eclipse.org/eclipselink/xsds/persistence/orm http://www.eclipse.org/eclipselink/xsds/eclipselink_orm_1_0.xsd"
+	version="1.0">
+	<entity class="org.jenmo.core.domain.Edge">
+		<attributes>
+			<id name="id">
+				<column name="ID" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="cascaded" fetch="LAZY">
+				<column name="CASCADED" updatable="false" column-definition="TINYINT(1)" />
+			</basic>
+		</attributes>
+	</entity>
+	<entity class="org.jenmo.core.domain.Node">
+		<attributes>
+			<id name="id">
+				<column name="ID" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="isRoot" fetch="LAZY">
+				<column name="ISROOT" updatable="false" column-definition="TINYINT(1)" />
+			</basic>
+		</attributes>
+	</entity>
+	<entity class="org.jenmo.core.domain.NodeField">
+		<attributes>
+			<id name="id">
+				<column name="ID" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+		</attributes>
+	</entity>
+	<entity class="org.jenmo.core.domain.NodeProperty">
+		<attributes>
+			<id name="id">
+				<column name="ID" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+		</attributes>
+	</entity>
+	<entity class="org.jenmo.core.domain.NodeRevision">
+		<attributes>
+			<id name="id">
+				<column name="ID" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+		</attributes>
+	</entity>
+	<entity class="org.jenmo.core.domain.NodeType">
+		<attributes>
+			<id name="id">
+				<column name="ID" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+		</attributes>
+	</entity>
+	<entity class="org.jenmo.core.domain.Property">
+		<attributes>
+			<id name="id">
+				<column name="ID" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+		</attributes>
+	</entity>
+	<entity class="org.jenmo.core.domain.SplitBlob">
+		<attributes>
+			<id name="id">
+				<column name="ID" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+		</attributes>
+	</entity>
+	<entity class="org.jenmo.core.domain.SplitBlobPart">
+		<attributes>
+			<id name="id">
+				<column name="ID" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="data" fetch="LAZY">
+				<column name="DATA" column-definition="LONGBLOB" />
+			</basic>
+		</attributes>
+	</entity>
+</entity-mappings>

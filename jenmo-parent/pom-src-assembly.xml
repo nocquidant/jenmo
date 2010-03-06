@@ -1,0 +1,95 @@
+<assembly>
+	<id>src</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<moduleSets>
+		<moduleSet>
+			<includes>
+				<include>org.jenmo:jenmo-common</include>
+			</includes>
+			<sources>
+				<includeModuleDirectory>false</includeModuleDirectory>
+				<fileSets>
+					<fileSet>
+						<outputDirectory></outputDirectory>
+						<includes>
+							<include>src/**</include>
+						</includes>
+					</fileSet>
+				</fileSets>
+			</sources>
+			<!--
+				<sources> <fileSets> <fileSet> <excludes>
+				<exclude>target/**</exclude> <exclude>.settings/**</exclude>
+				</excludes> </fileSet> </fileSets> </sources>
+			-->
+		</moduleSet>
+		<moduleSet>
+			<includes>
+				<include>org.jenmo:jenmo-core</include>
+			</includes>
+			<sources>
+				<includeModuleDirectory>false</includeModuleDirectory>
+				<fileSets>
+					<fileSet>
+						<outputDirectory></outputDirectory>
+						<includes>
+							<include>src/**</include>
+						</includes>
+					</fileSet>
+				</fileSets>
+			</sources>
+			<!--
+				<sources> <fileSets> <fileSet> <excludes>
+				<exclude>target/**</exclude> <exclude>.settings/**</exclude>
+				</excludes> </fileSet> </fileSets> </sources>
+			-->
+		</moduleSet>
+		<moduleSet>
+			<includes>
+				<include>org.jenmo:jenmo-core-openjpa
+				</include>
+			</includes>
+			<sources>
+				<includeModuleDirectory>false</includeModuleDirectory>
+				<fileSets>
+					<fileSet>
+						<outputDirectory></outputDirectory>
+						<includes>
+							<include>src/**</include>
+						</includes>
+					</fileSet>
+				</fileSets>
+			</sources>
+			<!--
+				<sources> <fileSets> <fileSet> <excludes>
+				<exclude>target/**</exclude> <exclude>.settings/**</exclude>
+				</excludes> </fileSet> </fileSets> </sources>
+			-->
+		</moduleSet>
+		<moduleSet>
+			<includes>
+				<include>org.jenmo:jenmo-core-eclipselink
+				</include>
+			</includes>
+			<sources>
+				<includeModuleDirectory>false</includeModuleDirectory>
+				<fileSets>
+					<fileSet>
+						<outputDirectory></outputDirectory>
+						<includes>
+							<include>src/**</include>
+						</includes>
+					</fileSet>
+				</fileSets>
+			</sources>
+			<!--
+				<sources> <fileSets> <fileSet> <excludes>
+				<exclude>target/**</exclude> <exclude>.settings/**</exclude>
+				</excludes> </fileSet> </fileSets> </sources>
+			-->
+		</moduleSet>
+	</moduleSets>
+</assembly>

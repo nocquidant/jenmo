@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Appenders -->
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{ISO8601}] %-5p %c %m %n" />
+		</layout>
+	</appender>
+	<appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${user.home}/Jenmo.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="50MB" />
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%t]: %c(%L) - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- OpenJPA channels -->
+	<category name="openjpa.Tool">
+		<level value="WARN" />
+	</category>
+	<category name="openjpa.Runtime">
+		<level value="WARN" />
+	</category>
+	<category name="openjpa.Remote">
+		<level value="WARN" />
+	</category>
+	<category name="openjpa.DataCache">
+		<level value="WARN" />
+	</category>
+	<category name="openjpa.MetaData">
+		<level value="WARN" />
+	</category>
+	<category name="openjpa.Enhance">
+		<level value="WARN" />
+	</category>
+	<category name="openjpa.Query">
+		<level value="WARN" />
+	</category>
+	<category name="openjpa.jdbc.SQL">
+		<level value="WARN" />
+	</category>
+	<category name="openjpa.jdbc.JDBC">
+		<level value="WARN" />
+	</category>
+	<category name="openjpa.jdbc.Schema">
+		<level value="WARN" />
+	</category>
+
+	<!-- Jenmo channels -->
+	<category name="org.jenmo.common">
+		<level value="INFO" />
+	</category>
+	<category name="org.jenmo.core">
+		<level value="INFO" />
+	</category>
+	<category name="org.jenmo.common.repository">
+		<level value="DEBUG" />
+	</category>
+	<category name="org.jenmo.core.repository">
+		<level value="DEBUG" />
+	</category>
+
+	<!-- Root channel -->
+	<root>
+		<level value="WARN" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+
+</log4j:configuration>

@@ -1,0 +1,19 @@
+   =========================================================================
+   ==  NOTICE file corresponding to the section 4 d of                    ==
+   ==  the Apache License, Version 2.0,                                   ==
+   ==  in this case for the Jenmo distribution.                           ==
+   =========================================================================
+
+* Jenmo includes software developed by the OpenJPA project
+    Copyright (c) 2007-2008, Apache Software Foundation. All rights reserved.
+
+* Jenmo includes software developed by the DataNucleus project
+    Copyright (c) 2008-2008, Apache Software Foundation. All rights reserved.
+
+* Jenmo includes software developed by the scoped-entitymanager project
+    Copyright (c) 2007-2008, GNU LGPL. All rights reserved.
+
+* Jenmo includes software developed by the Visad project
+    Copyright (c) 1997-2008, GNU LGPL. All rights reserved.
+
+* Jenmo includes software written by Bill Dudney

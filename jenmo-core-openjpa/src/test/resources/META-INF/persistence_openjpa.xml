@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
+	<persistence-unit name="JenmoPU" transaction-type="RESOURCE_LOCAL">
+		<!--
+			The default provider can be OpenJPA, or some other product. This
+			element is optional if OpenJPA is the only JPA provider in the
+			current classloading environment, but can be specified in cases where
+			there are multiple JPA implementations available.
+		-->
+		<provider> org.apache.openjpa.persistence.PersistenceProviderImpl
+		</provider>
+
+		<!-- We must enumerate each entity in the persistence unit -->
+		<class>org.jenmo.core.domain.Edge</class>
+		<class>org.jenmo.core.domain.Node</class>
+		<class>org.jenmo.core.domain.NodeField
+		</class>
+		<class>org.jenmo.core.domain.NodeProperty
+		</class>
+		<class>org.jenmo.core.domain.NodeRevision
+		</class>
+		<class>org.jenmo.core.domain.NodeType
+		</class>
+		<class>org.jenmo.core.domain.Property
+		</class>
+		<class>org.jenmo.core.domain.SplitBlob
+		</class>
+		<class>org.jenmo.core.domain.SplitBlobPart
+		</class>
+
+		<!-- Properties  -->
+		<properties>
+			<!-- Connection -->
+			<property name="openjpa.ConnectionProperties"
+				value="DriverClassName=@db.driver.class@,
+	                  Url=jdbc:@db.type@://@db.host@:@db.port@/@db.name@@jdbc.driver.properties@,
+	                  MaxActive=100, 
+	                  MaxWait=10000,
+	                  TestOnBorrow=true, 
+	                  Username=@connection.user.name@, 
+	                  Password=@connection.password@" />
+			<property name="openjpa.ConnectionDriverName" value="org.apache.commons.dbcp.BasicDataSource" />
+
+			<!-- Transaction -->
+			<property name="openjpa.Optimistic" value="true" />
+			<property name="openjpa.RetainState" value="true" />
+			<property name="openjpa.jdbc.DBDictionary"
+				value="@jpa.dictionary@(BatchLimit=600)" />
+			<property name="openjpa.jdbc.TransactionIsolation" value="repeatable-read" />
+
+			<!-- Cache -->
+			<property name="openjpa.DataCache" value="true" />
+			<property name="openjpa.QueryCache" value="true" />
+			<property name="openjpa.RemoteCommitProvider" value="sjvm" />
+			<property name="openjpa.BrokerImpl" value="EvictFromDataCache=true" />
+
+			<!-- Large Result Sets -->
+			<property name="openjpa.FetchBatchSize" value="0" />
+			<property name="openjpa.jdbc.ResultSetType" value="scroll-sensitive" />
+			<property name="openjpa.jdbc.LRSSize" value="query" />
+
+			<!-- Logs -->
+			<property name="openjpa.Log" value="log4j" />
+			<!-- property name="openjpa.Log" value="SQL=TRACE" /-->
+		</properties>
+	</persistence-unit>
+</persistence>

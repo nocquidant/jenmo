@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="jenmo" default="init">
+	<!-- Sets the DSTAMP, TSTAMP, and TODAY properties -->
+	<property name="year" value="2008" />
+	<tstamp>
+		<format property="touch.time" pattern="dd_MM_yyyy-hh_mm_aa" />
+	</tstamp>
+
+	<!-- Java properties -->
+	<property name="build.compiler" value="modern" />
+	<property name="debug" value="on" />
+	<property name="optimize" value="on" />
+	<property name="source" value="1.6" />
+	<property name="target" value="1.6" />
+	<property name="deprecation" value="off" />
+	<property name="mx" value="1G" />
+
+	<!-- Project properties -->
+	<property name="project.name" value="jenmo" />
+
+	<!-- Get basedir unix form (with slash) -->
+	<pathconvert targetos="unix" property="basedir.slashed">
+		<path location="${basedir}" />
+	</pathconvert>
+
+	<!-- Ant properties -->
+	<property name="root.dir" value="." />
+	<property name="build.dir" value="${root.dir}/build" />
+	<property name="report.dir" value="${root.dir}/output" />
+
+	<!-- DBMS properties -->
+	<property file="${basedir}/src/test/resources/jenmo.properties" />
+	<property file="build.properties" />
+
+
+	<!-- classpath -->
+	<path id="classpath" description="The classpath to use for compiling and running">
+		<pathelement location="${maven.plugin.classpath}" />
+	</path>
+
+	<!-- targets: general -->
+	<target name="info" />
+	
+	<target name="init" />
+
+	<!-- DBMS type -->
+	<condition property="is.db.mysql">
+		<equals arg1="${db.type}" arg2="mysql" />
+	</condition>
+	<condition property="is.db.postgres">
+		<equals arg1="${db.type}" arg2="postgresql" />
+	</condition>
+
+	<!-- targets: init database -->
+	<target name="init.db.mysql" if="is.db.mysql">
+		<exec dir="${db.client.dir}" executable="${db.client.dir}/${db.client.exe}" failonerror="true">
+			<arg line="-h ${db.host} -P ${db.port} -u ${connection.user.name} -p${connection.password} -e 'DROP DATABASE IF EXISTS ${db.name}; CREATE DATABASE ${db.name} CHARACTER SET utf8 COLLATE utf8_bin; '" />
+		</exec>
+	</target>
+	<target name="init.db.postgres" if="is.db.postgres">
+		<exec dir="${db.client.dir}" executable="${db.client.dir}/${db.client.exe}" failonerror="true">
+			<arg line="-h ${db.host} -p ${db.port} -U ${connection.user.name} -c 'DROP DATABASE IF EXISTS ${db.name};'" />
+		</exec>
+		<exec dir="${db.client.dir}" executable="${db.client.dir}/${db.client.exe}" failonerror="true">
+			<arg line="-h ${db.host} -p ${db.port} -U ${connection.user.name} -c &quot;CREATE DATABASE ${db.name} WITH OWNER = ${connection.user.name} ENCODING = 'UTF8';&quot;" />
+		</exec>
+	</target>
+	<target name="init.db" description="Init DB (drop'n'create)" depends="init">
+		<antcall target="init.db.mysql" />
+		<antcall target="init.db.postgres" />
+	</target>
+
+	<!-- targets: init resources -->
+	<target name="init.resources" description="Init resources (persistence.xml file)" depends="init">
+		<filter token="jpa.dictionary" value="${jpa.dictionary}" />
+		<filter token="jpa.target.database" value="${jpa.target.database}" />
+		<filter token="connection.user.name" value="${connection.user.name}" />
+		<filter token="connection.password" value="${connection.password}" />
+		<filter token="jdbc.driver.properties" value="${jdbc.driver.properties}" />
+		<filter token="db.type" value="${db.type}" />
+		<filter token="db.driver.class" value="${db.driver.class}" />
+		<filter token="db.host" value="${db.host}" />
+		<filter token="db.port" value="${db.port}" />
+		<filter token="db.name" value="${db.name}" />
+		<filter token="db.client.dir" value="${db.client.dir}" />
+		<filter token="db.client.exe" value="${db.client.exe}" />
+
+		<property name="metainf.dir.dest" value="${basedir}/src/test/resources/META-INF/" />
+		<property name="module.dir.src" value="${basedir}/../jenmo-core-${jenmo.option.jpa.provider}" />
+		<property name="metainf.dir.src" value="${module.dir.src}/src/test/resources/META-INF/" />
+
+		<copy file="${metainf.dir.src}/persistence_${jenmo.option.jpa.provider}.xml" tofile="${metainf.dir.dest}/persistence.xml" filtering="true" overwrite="true" />
+		<copy file="${metainf.dir.src}/orm-${db.type}.xml" tofile="${metainf.dir.dest}/orm.xml" overwrite="true" />
+		<copy file="${basedir}/src/main/resources/database_${db.type}.sql" tofile="${basedir}/src/test/resources/database.sql" overwrite="true" />
+	</target>
+
+	<!-- targets: init schema -->
+	<target name="init.schema.mysql" if="is.db.mysql">
+		<exec dir="${db.client.dir}" executable="${db.client.dir}/${db.client.exe}" failonerror="true">
+			<arg line="-h ${db.host} -P ${db.port} -u ${connection.user.name} -p${connection.password} -e 'USE ${db.name}; SOURCE ${basedir}/src/test/resources/database.sql';" />
+		</exec>
+	</target>
+	<target name="init.schema.postgres" if="is.db.postgres">
+		<exec dir="${db.client.dir}" executable="${db.client.dir}/${db.client.exe}" failonerror="true">
+			<arg line="-h ${db.host} -p ${db.port} -U ${connection.user.name} -f '${basedir}/src/test/resources/database.sql' ${db.name}" />
+		</exec>
+	</target>
+	<target name="init.schema" description="Init schema (source SQL file)" depends="init">
+		<antcall target="init.schema.mysql" />
+		<antcall target="init.schema.postgres" />
+	</target>
+
+	<!-- targets: init all -->
+	<target name="init.all" description="Init resources and DB" depends="init.db, init.resources, init.schema">
+	</target>
+</project>

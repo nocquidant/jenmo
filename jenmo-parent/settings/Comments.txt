@@ -1,0 +1,36 @@
+* Mieux pas de différenciation kinship a : ajouter des delete dans callback si plus utilisé on supprime,
+sinon même lien faible on laisse ?!
+
+* accès concurrents : 
+    Si on reste Optimiste, on essaie à nouveau (avec merge ?)
+
+* verrous applicatifs :
+    Un type de lien mais risque d'impliquer bcp de parcours
+    Peut-être faudra-t-il une table qui regroupe les infos de locks de chaque noeud... 
+    Pb wf : on veut ajouter tout le temps
+    Pb wf : cela dépend des états (pas démarrer OK !)
+
+* unité & repère -> probablement des propriétés de node
+
+* mesures
+    Les blobs sont splittés mais on devrait pouvoir utiliser les "size*" pour récuperer la
+    bonne partie (sous réserve d'voir pris la main sur la sérialisation)
+    Si jamais on veut vraiment un accés aléatoire, le mieux serait sans doute de dumper le
+    blob en entier dans un fichier côté code client
+
+* partage des mesures ?
+    Sans doute faudrait il faire un NodeRevision qui permettrait d'ajouter des mesures 
+    en plus de celle du parent
+    Sans doute faudrait-il permettre à un NodeRevision d'inhiber les propriétés de
+    son parent si on veut pas les voir (bidouille : une mesure de même type mais vide ?)
+
+* Revision
+    Cela ne devrait-il pas être un enfant comme un autre avec un type de lien particulier ?
+    -> navigation plus aisée mais une revision est tout de même à part
+    Il faudrait sans doute ajouter un décorateur qui renvoie vers le parent pour les get, et 
+    ajoute dans le nouveau noeud pour les set ? Uniquement pour les mesures (le reste peut 
+    facilement être copié) ?
+    
+* Web Framework : voir PersistenceAppRequestListener & PersistenceAppListener
+(http://code.google.com/p/scoped-entitymanager/)
+* Spring Framework : http://bill.dudney.net/roller/bill/entry/20070428

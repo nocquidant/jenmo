@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
+	<persistence-unit name="JenmoPU" transaction-type="RESOURCE_LOCAL">
+		<!--
+			The default provider can be OpenJPA, or some other product. This
+			element is optional if OpenJPA is the only JPA provider in the
+			current classloading environment, but can be specified in cases where
+			there are multiple JPA implementations available.
+		-->
+		<provider> org.eclipse.persistence.jpa.PersistenceProvider
+		</provider>
+
+		<!-- We must enumerate each entity in the persistence unit -->
+		<class>org.jenmo.core.domain.Edge</class>
+		<class>org.jenmo.core.domain.Node</class>
+		<class>org.jenmo.core.domain.NodeField
+		</class>
+		<class>org.jenmo.core.domain.NodeProperty
+		</class>
+		<class>org.jenmo.core.domain.NodeRevision
+		</class>
+		<class>org.jenmo.core.domain.NodeType
+		</class>
+		<class>org.jenmo.core.domain.Property
+		</class>
+		<class>org.jenmo.core.domain.SplitBlob
+		</class>
+		<class>org.jenmo.core.domain.SplitBlobPart
+		</class>
+
+		<!-- Properties  -->
+		<properties>
+			<!-- JDBC -->
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:postgresql://localhost:5432/jenmo?compatible=7.1" />
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+			<property name="javax.persistence.jdbc.user" value="postgres" />
+			<property name="javax.persistence.jdbc.password" value="dbadmin" />
+
+			<property name="eclipselink.jdbc.batch-writing" value="JDBC" />
+			<property name="eclipselink.jdbc.batch-writing.size" value="1000" />
+			<property name="eclipselink.jdbc.cache-statements" value="true" />
+			<property name="eclipselink.jdbc.cache-statements.size"
+				value="1000" />
+
+			<!-- Targets -->
+			<property name="eclipselink.target-database" value="org.jenmo.core.orm.domain.LargeObjectPostgreSQLPlatform" />
+			<property name="eclipselink.target-server" value="None" />
+
+			<!-- Object Cache -->
+			<property name="eclipselink.cache.shared.default" value="true" />
+
+			<!-- Query Cache -->
+			<property name="eclipselink.query-results-cache" value="true" />
+			<property name="eclipselink.query-results-cache.expiry"
+				value="100000" />
+			<property name="eclipselink.query-results-cache.size" value="1000" />
+
+			<!-- Create the database schema automatically -->
+			<!--
+				<property name="eclipselink.ddl-generation"
+				value="drop-and-create-tables" /> <property
+				name="eclipselink.ddl-generation.output-mode" value="database" />
+			-->
+
+			<!-- Others -->
+			<property name="eclipselink.jdbc.uppercase-columns" value="true" />
+			<property name="eclipselink.logging.level" value="OFF" />
+
+		</properties>
+	</persistence-unit>
+</persistence>
