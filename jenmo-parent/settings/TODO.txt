@@ -1,5 +1,0 @@
-* Généraliser les Localiser.
-* Repertoire licence.
-* SessionHelper : BOF !
-* Revision : interdire la modif des measures du parent si revision existe !!
-* ETL & Blobs ?
