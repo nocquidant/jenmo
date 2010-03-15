@@ -22,7 +22,6 @@
 package org.jenmo.core.persistence;
 
 import java.util.Map;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -30,15 +29,16 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.FlushModeType;
 import javax.persistence.LockModeType;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.QueryBuilder;
 import javax.persistence.metamodel.Metamodel;
 
 /**
  * @author Nicolas Ocquidant (thanks to puncherico)
  * @since 1.0
  */
-abstract class EntityManagerProxy implements EntityManager {
+ abstract class EntityManagerProxy implements EntityManager {
 
    protected final EntityManager delegate;
 
@@ -106,7 +106,7 @@ abstract class EntityManagerProxy implements EntityManager {
       return delegate.createNativeQuery(string);
    }
 
-   @SuppressWarnings("unchecked")
+   @SuppressWarnings("rawtypes")
    public Query createNativeQuery(String string, Class aClass) {
       return delegate.createNativeQuery(string, aClass);
    }
@@ -136,11 +136,6 @@ abstract class EntityManagerProxy implements EntityManager {
    }
 
    @Override
-   public Query createQuery(CriteriaQuery arg0) {
-      return delegate.createQuery(arg0);
-   }
-
-   @Override
    public <T> T find(Class<T> arg0, Object arg1, LockModeType arg2) {
       return delegate.find(arg0, arg1, arg2);
    }
@@ -158,16 +153,6 @@ abstract class EntityManagerProxy implements EntityManager {
    @Override
    public Map<String, Object> getProperties() {
       return delegate.getProperties();
-   }
-
-   @Override
-   public QueryBuilder getQueryBuilder() {
-      return delegate.getQueryBuilder();
-   }
-
-   @Override
-   public Set<String> getSupportedProperties() {
-      return delegate.getSupportedProperties();
    }
 
    @Override
@@ -196,16 +181,6 @@ abstract class EntityManagerProxy implements EntityManager {
    }
 
    @Override
-   public <T> T find(Class<T> arg0, Object arg1, Map<String, Object> arg2) {
-      return delegate.find(arg0, arg1, arg2);
-   }
-
-   @Override
-   public <T> T find(Class<T> arg0, Object arg1, LockModeType arg2, Map<String, Object> arg3) {
-      return delegate.find(arg0, arg1, arg2, arg3);
-   }
-
-   @Override
    public Metamodel getMetamodel() {
       return delegate.getMetamodel();
    }
@@ -218,5 +193,36 @@ abstract class EntityManagerProxy implements EntityManager {
    @Override
    public void setProperty(String arg0, Object arg1) {
       delegate.setProperty(arg0, arg1);
+   }
+
+   @Override
+   public <T> T find(Class<T> entityClass, Object primaryKey, Map<String, Object> properties) {
+      return delegate.find(entityClass, primaryKey, properties);
+   }
+
+   @Override
+   public <T> T find(Class<T> entityClass, Object primaryKey, LockModeType lockMode,
+         Map<String, Object> properties) {
+      return delegate.find(entityClass, primaryKey, lockMode, properties);
+   }
+
+   @Override
+   public <T> TypedQuery<T> createQuery(CriteriaQuery<T> criteriaQuery) {
+      return delegate.createQuery(criteriaQuery);
+   }
+
+   @Override
+   public <T> TypedQuery<T> createQuery(String qlString, Class<T> resultClass) {
+      return delegate.createQuery(qlString, resultClass);
+   }
+
+   @Override
+   public <T> TypedQuery<T> createNamedQuery(String name, Class<T> resultClass) {
+      return delegate.createNamedQuery(name, resultClass);
+   }
+
+   @Override
+   public CriteriaBuilder getCriteriaBuilder() {
+      return delegate.getCriteriaBuilder();
    }
 }

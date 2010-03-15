@@ -43,7 +43,7 @@ public class ScopedEntityManagerFactory extends EntityManagerFactoryProxy implem
       this.threadLocal = new ThreadLocal<LazyCloseEntityManager>();
    }
 
-   @SuppressWarnings("unchecked")
+   @SuppressWarnings("rawtypes")
    public EntityManager createEntityManager(Map map) {
       LazyCloseEntityManager em = threadLocal.get();
       if (em == null) {

@@ -41,22 +41,17 @@ public class Descriptors {
 
    }
 
-   @SuppressWarnings("unchecked")
-   private static SoftValueMap<Class, PropDescAsList> cachePropList = new SoftValueMap<Class, PropDescAsList>();
+   private static SoftValueMap<Class<?>, PropDescAsList<?>> cachePropList = new SoftValueMap<Class<?>, PropDescAsList<?>>();
 
-   @SuppressWarnings("unchecked")
-   private static SoftValueMap<Class, SoftValueMap<Class, PropDescAsMap>> cachePropMap = new SoftValueMap<Class, SoftValueMap<Class, PropDescAsMap>>();
+   private static SoftValueMap<Class<?>, SoftValueMap<Class<?>, PropDescAsMap<?, ?>>> cachePropMap = new SoftValueMap<Class<?>, SoftValueMap<Class<?>, PropDescAsMap<?,?>>>();
 
-   @SuppressWarnings("unchecked")
-   private static SoftValueMap<Class, PropDescAsSet> cachePropSet = new SoftValueMap<Class, PropDescAsSet>();
+   private static SoftValueMap<Class<?>, PropDescAsSet<?>> cachePropSet = new SoftValueMap<Class<?>, PropDescAsSet<?>>();
 
-   @SuppressWarnings("unchecked")
-   private static SoftValueMap<Class, PropDescAsSingle> cachePropSingle = new SoftValueMap<Class, PropDescAsSingle>();
+   private static SoftValueMap<Class<?>, PropDescAsSingle<?>> cachePropSingle = new SoftValueMap<Class<?>, PropDescAsSingle<?>>();
 
    private static SoftReference<NodeDescAsList> cacheNodeList = null;
 
-   @SuppressWarnings("unchecked")
-   private static SoftValueMap<Class, NodeDescAsMap> cacheNodeMap = new SoftValueMap<Class, NodeDescAsMap>();
+   private static SoftValueMap<Class<?>, NodeDescAsMap<?>> cacheNodeMap = new SoftValueMap<Class<?>, NodeDescAsMap<?>>();
 
    private static SoftReference<NodeDescAsSet> cacheNodeSet = null;
 
@@ -90,9 +85,9 @@ public class Descriptors {
     */
    @SuppressWarnings("unchecked")
    public static <K, V> IPropDescAsMap<K, V> mapForProps(Class<K> clazz1, Class<V> clazz2) {
-      SoftValueMap<Class, PropDescAsMap> vmap = cachePropMap.get(clazz1);
+      SoftValueMap<Class<?>, PropDescAsMap<?,?>> vmap = cachePropMap.get(clazz1);
       if (vmap == null) {
-         vmap = new SoftValueMap<Class, PropDescAsMap>();
+         vmap = new SoftValueMap<Class<?>, PropDescAsMap<?,?>>();
          cachePropMap.put(clazz1, vmap);
       }
       PropDescAsMap<?, ?> v = vmap.get(clazz2);

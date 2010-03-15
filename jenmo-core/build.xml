@@ -30,7 +30,7 @@
 
 	<!-- DBMS properties -->
 	<property file="${basedir}/src/test/resources/jenmo.properties" />
-	<property file="build.properties" />
+	<property file="my.properties" />
 
 
 	<!-- classpath -->

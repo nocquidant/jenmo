@@ -38,7 +38,7 @@ import java.util.Set;
  * i.e. no other object has a strong reference to it, it may become garbage collected at the
  * discretion of the garbage collector (typically if the VM is low on memory). If this happens, the
  * entry in the <code>SoftValueMap</code> corresponding to the value object will also be removed.
- *
+ * 
  * @author Nicolas Ocquidant (thanks to Thomas Ambus)
  * @since 1.0
  */
@@ -118,7 +118,7 @@ public class SoftValueMap<K, V> extends AbstractMap<K, V> implements Map<K, V>, 
       return map.isEmpty();
    }
 
-   @SuppressWarnings("unchecked")
+   @SuppressWarnings({ "unchecked", "rawtypes" })
    private void expungeStaleEntries() {
       SoftValue<K, V> wv;
       while ((wv = (SoftValue) queue.poll()) != null) {
@@ -126,7 +126,7 @@ public class SoftValueMap<K, V> extends AbstractMap<K, V> implements Map<K, V>, 
       }
    }
 
-   @SuppressWarnings("unchecked")
+   @SuppressWarnings({ "unchecked", "rawtypes" })
    @Override
    public SoftValueMap<K, V> clone() {
       expungeStaleEntries();
@@ -139,7 +139,8 @@ public class SoftValueMap<K, V> extends AbstractMap<K, V> implements Map<K, V>, 
          throw new RuntimeException(e);
       }
 
-      svm.map = (HashMap) map.clone(); // to preserve initialCapacity, loadFactor
+      svm.map = (HashMap) map.clone(); // to preserve initialCapacity,
+      // loadFactor
       svm.map.clear();
 
       svm.queue = new ReferenceQueue<V>();
@@ -188,7 +189,7 @@ public class SoftValueMap<K, V> extends AbstractMap<K, V> implements Map<K, V>, 
       }
 
       @Override
-      @SuppressWarnings("unchecked")
+      @SuppressWarnings({ "unchecked", "rawtypes" })
       public boolean equals(Object o) {
          if (!(o instanceof Map.Entry)) {
             return false;

@@ -3,14 +3,15 @@
 	<parent>
 		<artifactId>jenmo</artifactId>
 		<groupId>org.jenmo</groupId>
-		<version>${jenmoVersion}</version>
+		<version>0.9.3-SNAPSHOT</version>
 		<relativePath>../jenmo-parent/pom.xml</relativePath>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jenmo</groupId>
 	<artifactId>jenmo-core</artifactId>
-	<version>${jenmoVersion}</version>
+	<packaging>jar</packaging>
+	<name>jenmo-core</name>
 
 	<profiles>
 		<profile>
@@ -22,19 +23,16 @@
 				<dependency>
 					<groupId>org.jenmo</groupId>
 					<artifactId>jenmo-core-eclipselink</artifactId>
-					<version>${jenmoVersion}</version>
 					<scope>compile</scope>
 				</dependency>
 				<dependency>
-					<groupId>eclipselink</groupId>
+					<groupId>org.eclipse.persistence</groupId>
 					<artifactId>eclipselink</artifactId>
-					<version>2.0.0.M8</version>
 					<scope>provided</scope>
 				</dependency>
 				<dependency>
 					<groupId>javax</groupId>
 					<artifactId>persistence</artifactId>
-					<version>2.0-preview</version>
 					<scope>provided</scope>
 				</dependency>
 			</dependencies>
@@ -45,25 +43,21 @@
 				<dependency>
 					<groupId>org.jenmo</groupId>
 					<artifactId>jenmo-core-openjpa</artifactId>
-					<version>${jenmoVersion}</version>
 					<scope>compile</scope>
 				</dependency>
 				<dependency>
 					<groupId>org.apache.openjpa</groupId>
-					<artifactId>openjpa</artifactId>
-					<version>2.0.0-SNAPSHOT</version>
+					<artifactId>openjpa-persistence</artifactId>
 					<scope>provided</scope>
 				</dependency>
 				<dependency>
 					<groupId>org.apache.geronimo.specs</groupId>
 					<artifactId>geronimo-jpa_2.0_spec</artifactId>
-					<version>1.0-EA2-SNAPSHOT</version>
 					<scope>provided</scope>
 				</dependency>
 				<dependency>
 					<groupId>org.apache.geronimo.specs</groupId>
 					<artifactId>geronimo-jta_1.1_spec</artifactId>
-					<version>1.1.1</version>
 					<scope>provided</scope>
 				</dependency>
 			</dependencies>
@@ -73,25 +67,9 @@
 	<build>
 		<plugins>
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>openjpa-maven-plugin</artifactId>
 				<version>1.0</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.4.2</version>
-				<configuration>
-					<skipTests>true</skipTests>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -124,7 +102,6 @@
 		<dependency>
 			<groupId>org.jenmo</groupId>
 			<artifactId>jenmo-common</artifactId>
-			<version>${jenmoVersion}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -150,7 +127,6 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

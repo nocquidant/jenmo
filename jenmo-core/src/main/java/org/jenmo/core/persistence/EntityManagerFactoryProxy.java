@@ -22,12 +22,12 @@
 package org.jenmo.core.persistence;
 
 import java.util.Map;
-import java.util.Set;
 
 import javax.persistence.Cache;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.criteria.QueryBuilder;
+import javax.persistence.PersistenceUnitUtil;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.metamodel.Metamodel;
 
 /**
@@ -50,7 +50,7 @@ abstract class EntityManagerFactoryProxy implements EntityManagerFactory {
       return delegate.createEntityManager();
    }
 
-   @SuppressWarnings("unchecked")
+   @SuppressWarnings("rawtypes")
    public EntityManager createEntityManager(Map map) {
       return delegate.createEntityManager(map);
    }
@@ -74,17 +74,17 @@ abstract class EntityManagerFactoryProxy implements EntityManagerFactory {
    }
 
    @Override
-   public QueryBuilder getQueryBuilder() {
-      return delegate.getQueryBuilder();
-   }
-
-   @Override
-   public Set<String> getSupportedProperties() {
-      return delegate.getSupportedProperties();
-   }
-
-   @Override
    public Metamodel getMetamodel() {
       return delegate.getMetamodel();
+   }
+
+   @Override
+   public CriteriaBuilder getCriteriaBuilder() {
+      return delegate.getCriteriaBuilder();
+   }
+
+   @Override
+   public PersistenceUnitUtil getPersistenceUnitUtil() {
+      return delegate.getPersistenceUnitUtil();
    }
 }

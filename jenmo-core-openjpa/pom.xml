@@ -3,68 +3,19 @@
 	<parent>
 		<artifactId>jenmo</artifactId>
 		<groupId>org.jenmo</groupId>
-		<version>${jenmoVersion}</version>
+		<version>0.9.3-SNAPSHOT</version>
 		<relativePath>../jenmo-parent/pom.xml</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jenmo</groupId>
 	<artifactId>jenmo-core-openjpa</artifactId>
 	<packaging>jar</packaging>
-	<version>${jenmoVersion}</version>
 	<name>jenmo-core-openjpa</name>
-	<url>http://maven.apache.org</url>
-	
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-	
+
 	<dependencies>
 		<dependency>
-			<groupId>org.jenmo</groupId>
-			<artifactId>jenmo-common</artifactId>
-			<version>${jenmoVersion}</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.openjpa</groupId>
-			<artifactId>openjpa</artifactId>
-			<version>2.0.0-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.geronimo.specs</groupId>
-			<artifactId>geronimo-jpa_2.0_spec</artifactId>
-			<version>1.0-EA2-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.geronimo.specs</groupId>
-			<artifactId>geronimo-jta_1.1_spec</artifactId>
-			<version>1.1.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-pool</groupId>
-			<artifactId>commons-pool</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-collections</groupId>
-			<artifactId>commons-collections</artifactId>
+			<artifactId>openjpa-jdbc</artifactId>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
